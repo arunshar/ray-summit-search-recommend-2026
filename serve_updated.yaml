@@ -1,4 +1,8 @@
-# This file was generated using the `serve build` command on Ray v2.53.0.
+# This file was generated using the `serve build` command on Ray v2.53.0,
+# then edited by hand. The repo Dockerfile image is anyscale/ray-llm:2.55.1,
+# so the pinned environment runs Ray v2.55.1. To refresh this config,
+# regenerate it with `serve build search_and_recommend:bound_ingress` on
+# Ray v2.55.1 and re-apply the replica and autoscaling edits below.
 
 proxy_location: EveryNode
 
