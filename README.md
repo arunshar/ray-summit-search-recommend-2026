@@ -9,6 +9,10 @@ You start from a pre-trained two-tower recommender and a product catalog with de
 3. **Fine-tune** the recommender on fresh interaction data with Ray Train.
 4. Optionally productionize the service on **Anyscale**.
 
+## Provenance
+
+This is Ray Summit 2026 Anyscale course material, republished with permission for personal study. Original content copyright 2026 Anyscale.
+
 ## What you will build
 
 ```
@@ -116,6 +120,14 @@ anyscale service status --name search_recommend_c26_61
 ```
 
 Replace the service URL and query token in the demo notebook with values from `anyscale service status` (do not commit live tokens). During a canary rollout you can pin traffic with the `X-ANYSCALE-VERSION` header (`primary`, `canary`, or a version id).
+
+## Running outside Anyscale
+
+The code expects a course-cluster data layout under `/mnt/cluster_storage/ecom/`: `users.ndjson`, the `cat_with_embeddings` parquet directory, an `hf_cache` snapshot of the embedding model, and the recommender checkpoint at `recommender/base_model/model.pt`. The public data source is `s3://anyscale-public-materials-use2/ecom` (unsigned reads work), which the inference notebook pulls on first run.
+
+`serve_updated.yaml` and `services_demo/` reference artifacts from the course's Anyscale account: the image `anyscale/image/c26:5`, the compute config `head-2a10g-small:2`, and the `education-us-west-2` cloud. Outsiders cannot use those, so the Anyscale deploy steps will not run as written outside that account. The `working_dir` zips point at the `anyscale-materials` S3 bucket, which is publicly readable at the time of writing but not under this repo's control.
+
+Notebook outputs: `1_Inference.ipynb` and `2_Training.ipynb` ship with executed outputs recorded on the course cluster. The labs and solutions ship without outputs by design, so you can run them yourself.
 
 ## Model
 
