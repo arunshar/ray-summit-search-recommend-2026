@@ -98,12 +98,12 @@ serve deploy serve_config.yaml
 
 `serve_updated.yaml` is a thicker config: 4 DatabaseFacade replicas, 2 Recommender replicas, and autoscaling Search/Ingress. It also sets a remote `working_dir` zip so workers do not depend on your workspace files.
 
-Query a running service:
+Query a running service (Ingress parses the body as a JSON *string*, same as the notebooks):
 
 ```bash
 curl -X POST http://localhost:8000/ \
   -H "Content-Type: application/json" \
-  -d '{"id":"7034dd99-ceb3-474d-a0ba-5beaf122273f","query":"steel bowls"}'
+  -d '"{\"id\":\"7034dd99-ceb3-474d-a0ba-5beaf122273f\",\"query\":\"steel bowls\"}"'
 ```
 
 ### Anyscale Services
