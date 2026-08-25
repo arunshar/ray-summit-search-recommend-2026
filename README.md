@@ -117,7 +117,9 @@ Two cautions on that table. The cluster shape is what the outline planned, not a
 ran. No file in this repo records a version banner from a cluster run, so the only version a run
 actually left behind is the Python 3.11.11 in the notebook metadata.
 
-The two lab notebooks whose outputs are committed here were run outside that image, on a laptop:
+The two lab notebooks whose outputs are committed here were run outside that image, on a laptop.
+These values were read from that machine at run time, not from any file in this repository, so
+nothing here can corroborate them:
 
 | Component | Version |
 | --- | --- |
