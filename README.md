@@ -68,6 +68,7 @@ Omit `query` to get recommendations only.
 | `offline_slides/` | Course slide deck (HTML + PDF) |
 | `outline-compute.md` | Full session outline and planned cluster size |
 | `Dockerfile` | Image with Ray, PyTorch, sentence-transformers, and related deps |
+| `requirements.txt` | Pip pins mirrored from the Dockerfile, for local work outside the container. |
 
 ## Suggested path through the material
 
@@ -102,7 +103,10 @@ serve deploy serve_config.yaml
 
 `serve_updated.yaml` is a thicker config: 4 DatabaseFacade replicas, 2 Recommender replicas, and autoscaling Search/Ingress. It also sets a remote `working_dir` zip so workers do not depend on your workspace files.
 
-Query a running service (Ingress parses the body as a JSON *string*, same as the notebooks):
+Query a running service. The module Ingress in `search_and_recommend.py` runs
+`json.loads(await request.json())`, a double parse, so it expects a JSON *string* body.
+The Ingress classes defined inline in `1_Inference.ipynb` parse once and take a normal
+JSON object instead:
 
 ```bash
 curl -X POST http://localhost:8000/ \
